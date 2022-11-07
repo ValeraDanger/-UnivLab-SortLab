@@ -1,10 +1,10 @@
-#include <stdio.h>
+п»ї#include <stdio.h>
 #include <locale.h>
 #include <inttypes.h>
 #include "ArrayTools.h"
 #include "Sortings.h"
 
-//------ Структуры -------------------------------------------------------
+//------ РЎС‚СЂСѓРєС‚СѓСЂС‹ -------------------------------------------------------
 struct AlgorithmTypesStruct {
 	const uint8_t sorting;
 	const uint8_t search;
@@ -32,21 +32,21 @@ const struct AlgorithmTypesStruct AlgorithmType = { 0, 1 };
 void main() {
 	setlocale(LC_ALL, "Russian");
 	for (;;) {
-		printf_s("\nВыберите номер типа алгоритма: \n");
-		printf_s("\t %" PRIu8 ". Сортировка массива \n", AlgorithmType.sorting);
-		printf_s("\t %" PRIu8 ". Поиск по массиву \n", AlgorithmType.search);
+		printf_s("\nР’С‹Р±РµСЂРёС‚Рµ РЅРѕРјРµСЂ С‚РёРїР° Р°Р»РіРѕСЂРёС‚РјР°: \n");
+		printf_s("\t %" PRIu8 ". РЎРѕСЂС‚РёСЂРѕРІРєР° РјР°СЃСЃРёРІР° \n", AlgorithmType.sorting);
+		printf_s("\t %" PRIu8 ". РџРѕРёСЃРє РїРѕ РјР°СЃСЃРёРІСѓ \n", AlgorithmType.search);
 		uint8_t chosen_alg_type = -1;
 		scanf_s("%" SCNu8, &chosen_alg_type);
 		int arr[] = { 2, 3, 1, 3, 2, 5, 2, 1 , 0 };
 
 		if (chosen_alg_type == AlgorithmType.sorting) {
-			printf_s("Выберите номер метода сортировки: \n");
-			printf_s("\t %" PRIu8 ". Сортировка пузырьком \n", SortType.bubble_sort);
-			printf_s("\t %" PRIu8 ". Сортировка выбором \n", SortType.selection_sort);
-			printf_s("\t %" PRIu8 ". Сортировка вставками \n", SortType.insertion_sort);
-			printf_s("\t %" PRIu8 ". Сортировка подсчетом \n", SortType.counting_sort);
-			printf_s("\t %" PRIu8 ". Быстрая сортировка  \n", SortType.quick_sort);
-			printf_s("\t %" PRIu8 ". Сортировка слиянием  \n", SortType.merge_sort);
+			printf_s("Р’С‹Р±РµСЂРёС‚Рµ РЅРѕРјРµСЂ РјРµС‚РѕРґР° СЃРѕСЂС‚РёСЂРѕРІРєРё: \n");
+			printf_s("\t %" PRIu8 ". РЎРѕСЂС‚РёСЂРѕРІРєР° РїСѓР·С‹СЂСЊРєРѕРј \n", SortType.bubble_sort);
+			printf_s("\t %" PRIu8 ". РЎРѕСЂС‚РёСЂРѕРІРєР° РІС‹Р±РѕСЂРѕРј \n", SortType.selection_sort);
+			printf_s("\t %" PRIu8 ". РЎРѕСЂС‚РёСЂРѕРІРєР° РІСЃС‚Р°РІРєР°РјРё \n", SortType.insertion_sort);
+			printf_s("\t %" PRIu8 ". РЎРѕСЂС‚РёСЂРѕРІРєР° РїРѕРґСЃС‡РµС‚РѕРј \n", SortType.counting_sort);
+			printf_s("\t %" PRIu8 ". Р‘С‹СЃС‚СЂР°СЏ СЃРѕСЂС‚РёСЂРѕРІРєР°  \n", SortType.quick_sort);
+			printf_s("\t %" PRIu8 ". РЎРѕСЂС‚РёСЂРѕРІРєР° СЃР»РёСЏРЅРёРµРј  \n", SortType.merge_sort);
 
 
 			uint8_t chosen_sorting_type = -1;
@@ -78,7 +78,7 @@ void main() {
 			}
 
 			else {
-				printf_s("Неверный номер метода сортировки!\n");
+				printf_s("РќРµРІРµСЂРЅС‹Р№ РЅРѕРјРµСЂ РјРµС‚РѕРґР° СЃРѕСЂС‚РёСЂРѕРІРєРё!\n");
 				continue;
 			}
 
@@ -86,11 +86,11 @@ void main() {
 		}
 
 		else if (chosen_alg_type == AlgorithmType.search) {
-			printf_s("Выберите номер метода поиска: \n");
+			printf_s("Р’С‹Р±РµСЂРёС‚Рµ РЅРѕРјРµСЂ РјРµС‚РѕРґР° РїРѕРёСЃРєР°: \n");
 		}
 
 		else {
-			printf_s("Неверный номер типа алгоритма!\n");
+			printf_s("РќРµРІРµСЂРЅС‹Р№ РЅРѕРјРµСЂ С‚РёРїР° Р°Р»РіРѕСЂРёС‚РјР°!\n");
 			continue;
 		}
 	}
