@@ -1,8 +1,8 @@
-#pragma onceсорт
+п»ї#pragma once
 
 #include <inttypes.h>
 
-//------ Структуры -------------------------------------------------------
+//------ РЎС‚СЂСѓРєС‚СѓСЂС‹ -------------------------------------------------------
 struct AlgorithmTypeNumTag {
 	const uint8_t sorting;
 	const uint8_t search;
