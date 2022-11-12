@@ -128,11 +128,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ArrayTools.c" />
+    <ClCompile Include="Searches.c" />
     <ClCompile Include="Sortings.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="Structs.c" />
+    <ClCompile Include="Structs.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArrayTools.h" />
+    <ClInclude Include="Searches.h" />
     <ClInclude Include="Sortings.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

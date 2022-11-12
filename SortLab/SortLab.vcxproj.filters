@@ -24,12 +24,24 @@
     <ClCompile Include="ArrayTools.c">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
+    <ClCompile Include="Searches.c">
+      <Filter>Файлы ресурсов</Filter>
+    </ClCompile>
+    <ClCompile Include="Structs.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClCompile>
+    <ClCompile Include="Structs.c">
+      <Filter>Файлы ресурсов</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sortings.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="ArrayTools.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Searches.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
