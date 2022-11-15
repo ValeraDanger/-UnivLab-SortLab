@@ -69,11 +69,8 @@ void quick_sort(int* arr, int left, int right) {
 		while (arr[j] > mid)
 			j--;
 
-		if (i <= j) {
-			swap(&arr[i], &arr[j]);
-			i++;
-			j--;
-		}
+		if (i <= j) 
+			swap(&arr[i++], &arr[j--]); /*Внесенные унарные операторы, ухудшает читаемость*/
 	}
 
 	if (j > left) 

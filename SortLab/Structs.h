@@ -32,6 +32,7 @@ struct ArrayFillingTypeNumTag {
 	const uint8_t random_ints;
 };
 
+
 extern struct AlgorithmTypeNumTag AlgorithmTypeNum;
 extern struct SortTypeNumTag SortTypeNum;
 extern struct SearchTypeNumTag SearchTypeNum;

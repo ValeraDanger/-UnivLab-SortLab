@@ -1,4 +1,4 @@
-#include <stdio.h>
+﻿#include <stdio.h>
 #include "ArrayTools.h"
 #include <stdlib.h>
 #include "config.h"
@@ -12,6 +12,12 @@ void swap(int *elem1, int *elem2) {
 }
 
 void printArray(int* arr, int size) {
+
+	#ifndef PRINT_ARRAYS
+	printf_s("[WARNING] Вывод массивов отключен в настройках проекта! Проверьте файл config.h \n");
+	return;
+	#endif // DEBUG
+
 	for (int i = 0; i < size; i++) {
 		printf_s("%d ", arr[i]);
 	}
@@ -47,6 +53,13 @@ void copyArray(int* arr, int* copying_arr, int size) {
 void generateRandomArray(int* arr, int size) {
 	for (int i = 0; i < size; i++) {
 		arr[i] = getRandInt(LOWER_RAND_VALUE, UPPER_RAND_VALUE);
+	}
+}
+
+void manualArrayFilling(int* arr, int size) {
+	printf_s("Введите элементы массива (каждый на новой строке) :\n");
+	for (int i = 0; i < size; i++) {
+		scanf_s("%d", &arr[i]);
 	}
 }
 

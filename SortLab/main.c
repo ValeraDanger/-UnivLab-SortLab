@@ -19,7 +19,7 @@ void main() {
 
 
 	for (;;) {
-
+/*------------------------------------Иннициализация массивов-------------------------------------------------------------------------*/
 		printf_s("Введите размер массива: \n");
 		int chosen_array_size;
 		scanf_s("%d", &chosen_array_size);
@@ -27,17 +27,25 @@ void main() {
 		printf_s("\t %" PRIu8 ". Ручное заполнение \n", ArrayFillingTypeNum.manual);
 		printf_s("\t %" PRIu8 ". Заполнение случайными числами [%d, %d] \n", ArrayFillingTypeNum.random_ints, LOWER_RAND_VALUE, UPPER_RAND_VALUE);
 		uint8_t chosen_filling_type;
-		scanf_s("%d", &chosen_filling_type);
+		scanf_s("%"SCNu8, &chosen_filling_type);
 
 		int* arr = (int*)malloc(chosen_array_size * sizeof(int));
 
 		if (chosen_filling_type == ArrayFillingTypeNum.manual) {
-
+			manualArrayFilling(arr, chosen_array_size);
 		}
 		else if (chosen_filling_type == ArrayFillingTypeNum.random_ints) {
 			generateRandomArray(arr, chosen_array_size);
-			printArray(arr, chosen_array_size);
 		}
+		else {
+			printf_s("Неверный номер способа заполнения! \n");
+			continue;
+		}
+		#ifdef PRINT_ARRAYS
+			printArray(arr, chosen_array_size);
+		#endif
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+
 
 		printf_s("Выберите номер типа алгоритма: \n");
 		printf_s("\t %" PRIu8 ". Сортировка массива \n", AlgorithmTypeNum.sorting);
@@ -89,8 +97,11 @@ void main() {
 				printf_s("Неверный номер метода сортировки!\n");
 				continue;
 			}
-
-			printArray(arr, chosen_array_size);
+			#ifdef PRINT_ARRAYS
+				printArray(arr, chosen_array_size);
+			#else
+				printf_s("[INFO] Массив отсортирован \n");
+			#endif
 		}
 //-------------------------------------------------------------------------------------------------------------------
 
@@ -116,7 +127,9 @@ void main() {
 				int* copied_arr = (int*)malloc(chosen_array_size * sizeof(int));
 				copyArray(arr, copied_arr, chosen_array_size);
 				insertion_sort(copied_arr, chosen_array_size);
-				printArray(copied_arr, chosen_array_size);
+				#ifdef PRINT_ARRAYS
+					printArray(copied_arr, chosen_array_size);
+				#endif
 				key_index = binary_search(copied_arr, chosen_array_size, chosen_key);
 				free(copied_arr);
 			}
