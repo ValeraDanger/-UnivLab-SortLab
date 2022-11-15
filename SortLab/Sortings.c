@@ -13,8 +13,8 @@ void bubble_sort(int *arr, int arr_size) {
 }
 
 void select_sort(int* arr, int arr_size) {
-	int* max = arr;
 	for (int i = arr_size - 1; i > 0; i--) {
+		int* max = arr;
 		for (int j = 0; j <= i; j++) {
 			if (arr[j] > *max) {
 				max = &arr[j];

@@ -1,5 +1,9 @@
 #include <stdio.h>
 #include "ArrayTools.h"
+#include <stdlib.h>
+#include "config.h"
+#include "ExtraTools.h"
+
 
 void swap(int *elem1, int *elem2) {
 	int temp = *elem1;
@@ -11,6 +15,7 @@ void printArray(int* arr, int size) {
 	for (int i = 0; i < size; i++) {
 		printf_s("%d ", arr[i]);
 	}
+	printf_s("\n");
 }
 
 int findMax(int* arr, int size) {
@@ -38,3 +43,10 @@ void copyArray(int* arr, int* copying_arr, int size) {
 		copying_arr[i] = arr[i];
 	}
 }
+
+void generateRandomArray(int* arr, int size) {
+	for (int i = 0; i < size; i++) {
+		arr[i] = getRandInt(LOWER_RAND_VALUE, UPPER_RAND_VALUE);
+	}
+}
+

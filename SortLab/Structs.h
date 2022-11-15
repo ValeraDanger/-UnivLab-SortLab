@@ -2,7 +2,7 @@
 
 #include <inttypes.h>
 
-//------ Структуры -------------------------------------------------------
+
 struct AlgorithmTypeNumTag {
 	const uint8_t sorting;
 	const uint8_t search;
@@ -27,8 +27,13 @@ struct ReturnCodeTag {
 	const uint8_t unchosen_num;
 };
 
+struct ArrayFillingTypeNumTag {
+	const uint8_t manual;
+	const uint8_t random_ints;
+};
+
 extern struct AlgorithmTypeNumTag AlgorithmTypeNum;
 extern struct SortTypeNumTag SortTypeNum;
 extern struct SearchTypeNumTag SearchTypeNum;
 extern struct ReturnCodeTag ReturnCode;
-//------------------------------------------------------------------------
+extern struct ArrayFillingTypeNumTag ArrayFillingTypeNum;

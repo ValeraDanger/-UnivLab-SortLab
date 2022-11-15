@@ -4,11 +4,6 @@
 #include <malloc.h>
 #include "Structs.h"
 
-extern struct AlgorithmTypeNum;
-extern struct SortTypeNumTag SortTypeNum;
-extern struct SearchTypeNumTag SearchTypeNum;
-extern struct ReturnCodeTag ReturnCode;
-
 
 int linear_search(int* arr, int size, int key){
 	int i = 0;
@@ -27,7 +22,7 @@ int binary_search(int* arr, int size, int key) {
 
 	while (left <= right) {
 		int mid = (left + right) / 2;
-		if (arr[mid] > key)
+		if (arr[mid] < key)
 			left = mid + 1;
 		else if (arr[mid] > key)
 			right = mid - 1;
