@@ -65,12 +65,12 @@ void quick_sort(int* arr, int left, int right) {
 	int mid = arr[(i + j) / 2];
 	while (i <= j) {
 		while (arr[i] < mid)
-			i++;
+			i++;							/*Здесь унарный оператор внести нельзя*/
 		while (arr[j] > mid)
 			j--;
 
 		if (i <= j) 
-			swap(&arr[i++], &arr[j--]); /*Внесенные унарные операторы, ухудшает читаемость*/
+			swap(&arr[i++], &arr[j--]);		/*Внесенные унарные операторы, ухудшает читаемость*/
 	}
 
 	if (j > left) 
@@ -78,4 +78,14 @@ void quick_sort(int* arr, int left, int right) {
 	if (i < right) 
 		quick_sort(arr, i, right);
 		
+}
+
+void merge_sort(int* arr, int left, int right) {
+	if (left+1 >= right) {
+		return;
+	}
+	int mid = (left + right) / 2;
+	merge_sort(arr, left, mid);
+	merge_sort(arr, mid, right);
+	merge(arr, left, mid, right);
 }

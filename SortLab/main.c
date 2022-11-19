@@ -18,6 +18,7 @@ void main() {
 	#endif
 
 
+
 	for (;;) {
 /*------------------------------------Иннициализация массивов-------------------------------------------------------------------------*/
 		printf_s("Введите размер массива: \n");
@@ -90,7 +91,8 @@ void main() {
 			}
 
 			else if (chosen_sorting_type == SortTypeNum.merge_sort) {
-
+				int* res_arr = (int*)malloc(chosen_array_size * sizeof(int));
+				merge_sort(arr, 0, chosen_array_size);	/*merge принимает интервал [left, right), поэтому передаем size, а не size-1*/
 			}
 
 			else {
