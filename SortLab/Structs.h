@@ -10,6 +10,7 @@ struct AlgorithmTypeNumTag {
 
 struct SortTypeNumTag {
 	const uint8_t bubble_sort;
+	const uint8_t cocktail_sort;
 	const uint8_t selection_sort;
 	const uint8_t insertion_sort;
 	const uint8_t counting_sort;

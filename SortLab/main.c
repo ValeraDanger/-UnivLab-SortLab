@@ -24,6 +24,11 @@ void main() {
 		printf_s("Введите размер массива: \n");
 		int chosen_array_size;
 		scanf_s("%d", &chosen_array_size);
+		chosen_array_size;
+		if (chosen_array_size < 1) {
+			printf_s("Размер массива должен быть больше 1!\n");
+			continue;
+		}
 		printf_s("Выберите способ заполнения массива: \n");
 		printf_s("\t %" PRIu8 ". Ручное заполнение \n", ArrayFillingTypeNum.manual);
 		printf_s("\t %" PRIu8 ". Заполнение случайными числами [%d, %d] \n", ArrayFillingTypeNum.random_ints, LOWER_RAND_VALUE, UPPER_RAND_VALUE);
@@ -59,6 +64,7 @@ void main() {
 		if (chosen_alg_type == AlgorithmTypeNum.sorting) {
 			printf_s("Выберите номер метода сортировки: \n");
 			printf_s("\t %" PRIu8 ". Сортировка пузырьком \n", SortTypeNum.bubble_sort);
+			printf_s("\t %" PRIu8 ". Шейкерная сортировка \n", SortTypeNum.cocktail_sort);
 			printf_s("\t %" PRIu8 ". Сортировка выбором \n", SortTypeNum.selection_sort);
 			printf_s("\t %" PRIu8 ". Сортировка вставками \n", SortTypeNum.insertion_sort);
 			printf_s("\t %" PRIu8 ". Сортировка подсчетом \n", SortTypeNum.counting_sort);
@@ -72,6 +78,10 @@ void main() {
 
 			if (chosen_sorting_type == SortTypeNum.bubble_sort) {
 				bubble_sort(arr, chosen_array_size);
+			}
+
+			else if (chosen_sorting_type == SortTypeNum.cocktail_sort) {
+				cocktail_sort(arr, chosen_array_size);
 			}
 			
 			else if (chosen_sorting_type == SortTypeNum.selection_sort) {
@@ -91,7 +101,6 @@ void main() {
 			}
 
 			else if (chosen_sorting_type == SortTypeNum.merge_sort) {
-				int* res_arr = (int*)malloc(chosen_array_size * sizeof(int));
 				merge_sort(arr, 0, chosen_array_size);	/*merge принимает интервал [left, right), поэтому передаем size, а не size-1*/
 			}
 
@@ -154,5 +163,6 @@ void main() {
 			continue;
 			free(arr);
 		}
+		free(arr);
 	}
 }

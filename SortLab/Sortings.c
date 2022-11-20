@@ -12,6 +12,28 @@ void bubble_sort(int *arr, int arr_size) {
 	}
 }
 
+void cocktail_sort(int* arr, int arr_size) {
+	int last_i = arr_size - 1, left = 0, right = arr_size - 1;
+	while (left < right) {
+		for (int i = left; i < right; i++) {
+			if (arr[i] > arr[i + 1]) {
+				swap(&arr[i], &arr[i + 1]);
+				last_i = i;	/*индекс последнего обмена*/
+			}
+		}
+		right = last_i;	/*сужаем область сортировки до последнего обмена, поскольку остальная часть массива уже отсортированна*/
+
+		for (int i = right; i > left; i--) {
+			if (arr[i] < arr[i - 1]) {
+				swap(&arr[i], &arr[i - 1]);
+				last_i = i;	/*индекс последнего обмена*/
+			}
+		}
+		left = last_i;	/*сужаем область сортировки до последнего обмена, поскольку остальная часть массива уже отсортированна*/
+
+	}
+}
+
 void select_sort(int* arr, int arr_size) {
 	for (int i = arr_size - 1; i > 0; i--) {
 		int* max = arr;

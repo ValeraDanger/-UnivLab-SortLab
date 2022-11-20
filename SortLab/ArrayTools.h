@@ -1,6 +1,6 @@
 #pragma once
 
-void swap(int* elem1, int* elem);
+void swap(int* elem1, int* elem2);
 void printArray(int* arr, int size);
 int findMax(int* arr, int size);
 int findMin(int* arr, int size);
