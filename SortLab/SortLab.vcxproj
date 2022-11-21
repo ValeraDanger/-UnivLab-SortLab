@@ -133,7 +133,7 @@
     <ClCompile Include="Sortings.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="Structs.c" />
-    <ClCompile Include="Structs.h" />
+    <ClInclude Include="Structs.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArrayTools.h" />
