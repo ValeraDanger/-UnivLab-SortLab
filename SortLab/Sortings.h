@@ -1,9 +1,9 @@
 #pragma once
 
-void bubble_sort(int* arr, int arr_size);
-void cocktail_sort(int* arr, int arr_size);
-void select_sort(int* arr, int arr_size);
-void insertion_sort(int* arr, int arr_size);
-void counting_sort(int* arr, int arr_size);
-void quick_sort(int* arr, int left, int right);
-void merge_sort(int* arr, int left, int right);
+void bubble_sort(int* arr, int arr_size, int* compare_count);
+void cocktail_sort(int* arr, int arr_size, int* compare_count);
+void select_sort(int* arr, int arr_size, int* compare_count);
+void insertion_sort(int* arr, int arr_size, int* compare_count);
+void counting_sort(int* arr, int arr_size, int* compare_count);
+void quick_sort(int* arr, int left, int right, int* compare_count);
+void merge_sort(int* arr, int left, int right, int* compare_count);

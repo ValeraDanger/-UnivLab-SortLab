@@ -27,10 +27,12 @@ void printArray(int* arr, int size) {
 }
 
 
-int findMax(int* arr, int size) {
+int findMax(int* arr, int size, int* compare_count) {
 	int max = arr[0];
 	for (int i = 1; i < size; i++) {
+		(*compare_count)++;
 		if (arr[i] > max) {
+			(*compare_count)++;
 			max = arr[i];
 		}
 	}
@@ -38,10 +40,12 @@ int findMax(int* arr, int size) {
 }
 
 
-int findMin(int* arr, int size) {
+int findMin(int* arr, int size, int* compare_count) {
 	int min = arr[0];
 	for (int i = 1; i < size; i++) {
+		(*compare_count)++;
 		if (arr[i] < min) {
+			(*compare_count)++;
 			min = arr[i];
 		}
 	}
@@ -49,8 +53,9 @@ int findMin(int* arr, int size) {
 }
 
 
-void copyArray(int* arr, int* copying_arr, int size) {
+void copyArray(int* arr, int* copying_arr, int size, int* compare_count) {
 	for (int i = 0; i < size; i++) {
+		(*compare_count)++;
 		copying_arr[i] = arr[i];
 	}
 }
@@ -71,19 +76,33 @@ void manualArrayFilling(int* arr, int size) {
 }
 
 
-void merge(int* arr, int left, int mid, int right) {
+void merge(int* arr, int left, int mid, int right, int* compare_count) {
 	int left_arr_i = 0, right_arr_i = 0, res_i = 0;
 	int* res_arr = (int*)malloc((right-left) * sizeof(int));
 
 	while (left + left_arr_i < mid && mid + right_arr_i < right) {
-		if (arr[left + left_arr_i] < arr[mid + right_arr_i]) res_arr[res_i] = arr[left + left_arr_i++];	/*Ухудшается читаемость кода, не использовать*/
-		else res_arr[res_i] = arr[mid + right_arr_i++];
+		(*compare_count)++;
+		if (arr[left + left_arr_i] < arr[mid + right_arr_i]) {
+			(*compare_count)++;
+			res_arr[res_i] = arr[left + left_arr_i++];	/*Ухудшается читаемость кода, не использовать*/
+		}
+		else {
+			(*compare_count)++;
+			res_arr[res_i] = arr[mid + right_arr_i++];
+		}
 		res_i++;
 	}
 
-	while (left + left_arr_i < mid) res_arr[res_i++] = arr[left + left_arr_i++];
-	while (mid + right_arr_i < right) res_arr[res_i++] = arr[mid + right_arr_i++];
+	while (left + left_arr_i < mid) {
+		(*compare_count)++;
+		res_arr[res_i++] = arr[left + left_arr_i++];
+	}
 
-	copyArray(res_arr, arr + left, res_i);
+	while (mid + right_arr_i < right) {
+		(*compare_count)++;
+		res_arr[res_i++] = arr[mid + right_arr_i++];
+	}
+
+	copyArray(res_arr, arr + left, res_i, compare_count);
 }
 

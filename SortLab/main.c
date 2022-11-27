@@ -52,7 +52,7 @@ void main() {
 		#endif
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 
-
+		int compare_count = 0;
 		printf_s("Выберите номер типа алгоритма: \n");
 		printf_s("\t %" PRIu8 ". Сортировка массива \n", AlgorithmTypeNum.sorting);
 		printf_s("\t %" PRIu8 ". Поиск по массиву \n", AlgorithmTypeNum.search);
@@ -77,31 +77,31 @@ void main() {
 
 
 			if (chosen_sorting_type == SortTypeNum.bubble_sort) {
-				bubble_sort(arr, chosen_array_size);
+				bubble_sort(arr, chosen_array_size, &compare_count);
 			}
 
 			else if (chosen_sorting_type == SortTypeNum.cocktail_sort) {
-				cocktail_sort(arr, chosen_array_size);
+				cocktail_sort(arr, chosen_array_size, &compare_count);
 			}
 			
 			else if (chosen_sorting_type == SortTypeNum.selection_sort) {
-				select_sort(arr, chosen_array_size);
+				select_sort(arr, chosen_array_size, &compare_count);
 			}
 
 			else if (chosen_sorting_type == SortTypeNum.insertion_sort) {
-				insertion_sort(arr, chosen_array_size);
+				insertion_sort(arr, chosen_array_size, &compare_count);
 			}
 
 			else if (chosen_sorting_type == SortTypeNum.counting_sort) {
-				counting_sort(arr, chosen_array_size);
+				counting_sort(arr, chosen_array_size, &compare_count);
 			}
 
 			else if (chosen_sorting_type == SortTypeNum.quick_sort) {
-				quick_sort(arr, 0, chosen_array_size - 1);
+				quick_sort(arr, 0, chosen_array_size - 1, &compare_count);
 			}
 
 			else if (chosen_sorting_type == SortTypeNum.merge_sort) {
-				merge_sort(arr, 0, chosen_array_size);	/*merge принимает интервал [left, right), поэтому передаем size, а не size-1*/
+				merge_sort(arr, 0, chosen_array_size, &compare_count);	/*merge принимает интервал [left, right), поэтому передаем size, а не size-1*/
 			}
 
 			else {
@@ -113,6 +113,8 @@ void main() {
 			#else
 				printf_s("[INFO] Массив отсортирован \n");
 			#endif
+
+			printf_s("Массив отсортирован за %d сравнений\n", compare_count);
 		}
 //-------------------------------------------------------------------------------------------------------------------
 
@@ -131,17 +133,18 @@ void main() {
 			int key_index = ReturnCode.key_not_found;
 
 			if (chosen_searching_type == SearchTypeNum.linear_search) {
-				key_index = linear_search(arr, chosen_array_size, chosen_key);
+				key_index = linear_search(arr, chosen_array_size, chosen_key, &compare_count);
 			}
 
 			else if (chosen_searching_type == SearchTypeNum.binary_search) {
 				int* copied_arr = (int*)malloc(chosen_array_size * sizeof(int));
-				copyArray(arr, copied_arr, chosen_array_size);
-				insertion_sort(copied_arr, chosen_array_size);
+				copyArray(arr, copied_arr, chosen_array_size, &compare_count);
+				insertion_sort(copied_arr, chosen_array_size, &compare_count);
+				compare_count = 0; /*Сравнения, полученные выше, не относятся непосредственно к алгоритму, поэтому обнуляем счетчик*/
 				#ifdef PRINT_ARRAYS
 					printArray(copied_arr, chosen_array_size);
 				#endif
-				key_index = binary_search(copied_arr, chosen_array_size, chosen_key);
+				key_index = binary_search(copied_arr, chosen_array_size, chosen_key, &compare_count);
 				free(copied_arr);
 			}
 
@@ -156,6 +159,7 @@ void main() {
 				printf_s("Заданный элемент в массиве не найден!\n");
 			else
 				printf_s("Заданный элемент находится в массиве по индексу %d\n", key_index);
+			printf_s("Поиск произведен за %d сравнений\n", compare_count);
 		}
 //-------------------------------------------------------------------------------------------------------------------
 		else {
