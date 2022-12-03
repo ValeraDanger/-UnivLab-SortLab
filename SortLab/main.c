@@ -21,7 +21,7 @@ void main() {
 
 	for (;;) {
 /*------------------------------------Иннициализация массивов-------------------------------------------------------------------------*/
-		printf_s("Введите размер массива: \n");
+		printf_s("\nВведите размер массива: \n");
 		int chosen_array_size;
 		scanf_s("%d", &chosen_array_size);
 		chosen_array_size;
@@ -52,7 +52,9 @@ void main() {
 		#endif
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 
-		int compare_count = 0;
+		long long int compare_count = 0;
+		long long int swap_count = 0;
+
 		printf_s("Выберите номер типа алгоритма: \n");
 		printf_s("\t %" PRIu8 ". Сортировка массива \n", AlgorithmTypeNum.sorting);
 		printf_s("\t %" PRIu8 ". Поиск по массиву \n", AlgorithmTypeNum.search);
@@ -74,18 +76,19 @@ void main() {
 
 			uint8_t chosen_sorting_type = ReturnCode.unchosen_num;
 			scanf_s("%" SCNu8, &chosen_sorting_type);
-
+			
+			const clock_t start_time = clock();
 
 			if (chosen_sorting_type == SortTypeNum.bubble_sort) {
-				bubble_sort(arr, chosen_array_size, &compare_count);
+				bubble_sort(arr, chosen_array_size, &compare_count, &swap_count);
 			}
 
 			else if (chosen_sorting_type == SortTypeNum.cocktail_sort) {
-				cocktail_sort(arr, chosen_array_size, &compare_count);
+				cocktail_sort(arr, chosen_array_size, &compare_count, &swap_count);
 			}
 			
 			else if (chosen_sorting_type == SortTypeNum.selection_sort) {
-				select_sort(arr, chosen_array_size, &compare_count);
+				select_sort(arr, chosen_array_size, &compare_count, &swap_count);
 			}
 
 			else if (chosen_sorting_type == SortTypeNum.insertion_sort) {
@@ -97,24 +100,35 @@ void main() {
 			}
 
 			else if (chosen_sorting_type == SortTypeNum.quick_sort) {
-				quick_sort(arr, 0, chosen_array_size - 1, &compare_count);
+				quick_sort(arr, 0, chosen_array_size - 1, &compare_count, &swap_count);
 			}
 
 			else if (chosen_sorting_type == SortTypeNum.merge_sort) {
-				merge_sort(arr, 0, chosen_array_size, &compare_count);	/*merge принимает интервал [left, right), поэтому передаем size, а не size-1*/
+				merge_sort(arr, 0, chosen_array_size, &compare_count);	/*merge_sort принимает интервал [left, right), поэтому передаем size, а не size-1*/
 			}
 
 			else {
 				printf_s("Неверный номер метода сортировки!\n");
 				continue;
 			}
+
+			const clock_t end_time = clock();
+
 			#ifdef PRINT_ARRAYS
 				printArray(arr, chosen_array_size);
 			#else
 				printf_s("[INFO] Массив отсортирован \n");
 			#endif
+			
+			if (compare_count > 0) {
+				printf_s("Массив отсортирован за %llu сравнений\n", compare_count);
+			}
 
-			printf_s("Массив отсортирован за %d сравнений\n", compare_count);
+			if (swap_count > 0) {
+				printf_s("Массив отсортирован за %llu перестановок\n", swap_count);
+			}
+
+			printf_s("Массив отсортирован за %lf мс\n", (double)(end_time - start_time) / CLOCKS_PER_SEC * 1000);
 		}
 //-------------------------------------------------------------------------------------------------------------------
 
@@ -132,19 +146,28 @@ void main() {
 
 			int key_index = ReturnCode.key_not_found;
 
+			clock_t start_time, end_time;
+
 			if (chosen_searching_type == SearchTypeNum.linear_search) {
+				start_time = clock();
+
 				key_index = linear_search(arr, chosen_array_size, chosen_key, &compare_count);
+				end_time = clock();
 			}
 
 			else if (chosen_searching_type == SearchTypeNum.binary_search) {
 				int* copied_arr = (int*)malloc(chosen_array_size * sizeof(int));
 				copyArray(arr, copied_arr, chosen_array_size, &compare_count);
-				insertion_sort(copied_arr, chosen_array_size, &compare_count);
+				counting_sort(copied_arr, chosen_array_size, &compare_count);
 				compare_count = 0; /*Сравнения, полученные выше, не относятся непосредственно к алгоритму, поэтому обнуляем счетчик*/
+
 				#ifdef PRINT_ARRAYS
 					printArray(copied_arr, chosen_array_size);
 				#endif
+
+				start_time = clock();
 				key_index = binary_search(copied_arr, chosen_array_size, chosen_key, &compare_count);
+				end_time = clock();
 				free(copied_arr);
 			}
 
@@ -159,7 +182,17 @@ void main() {
 				printf_s("Заданный элемент в массиве не найден!\n");
 			else
 				printf_s("Заданный элемент находится в массиве по индексу %d\n", key_index);
-			printf_s("Поиск произведен за %d сравнений\n", compare_count);
+			
+			if (compare_count > 0) {
+				printf_s("Поиск выполнен за %llu сравнений\n", compare_count);
+			}
+
+			if (swap_count > 0) {
+				printf_s("Поиск выполнен за %llu перестановок\n", swap_count);
+			}
+
+			printf_s("Поиск выполнен за %lf мс\n", (double)(end_time - start_time) / CLOCKS_PER_SEC * 1000);
+
 		}
 //-------------------------------------------------------------------------------------------------------------------
 		else {

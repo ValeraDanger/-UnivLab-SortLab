@@ -12,7 +12,6 @@ int linear_search(int* arr, int size, int key, int* compare_count){
 		i++;
 	}
 	if (arr[i] != key) {
-		(*compare_count)++;
 		i = ReturnCode.key_not_found;
 	}
 
@@ -25,22 +24,21 @@ int binary_search(int* arr, int size, int key, int* compare_count) {
 	int right = size - 1;
 
 	while (left <= right) {
-		(*compare_count)++;
 		int mid = (left + right) / 2;
 		if (arr[mid] < key) {
-			(*compare_count)++;
 			left = mid + 1;
 		}
 
 		else if (arr[mid] > key) {
-			(*compare_count)++;
 			right = mid - 1;
 		}
 
 		else {
-			(*compare_count)++;
+
 			return mid;
 		}
+
+		(*compare_count) += 2;
 	}
 
 	return ReturnCode.key_not_found;
