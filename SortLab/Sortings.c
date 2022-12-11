@@ -58,9 +58,10 @@ void insertion_sort(int* arr, int arr_size, int* compare_count) {
 	for (int i = 1; i < arr_size; i++) {
 		int j = i - 1;
 		int key = arr[i];
-		for (; j >= 0 && arr[j] > key; j--)
+		for (; j >= 0 && arr[j] > key; j--) {
 			(*compare_count)++;
 			arr[j + 1] = arr[j];
+		}
 		arr[j + 1] = key;
 	}
 }
